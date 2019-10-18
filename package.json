@@ -1,0 +1,38 @@
+{
+  "name": "sos_starwars",
+  "version": "1.0.0",
+  "description": "An API for listing the names of starwars movies along with their opening crawls and comment counts, adding and listing anonymous comments and getting character list.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omobosteven/sos_starwars.git"
+  },
+  "author": "stephen omobo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/omobosteven/sos_starwars/issues"
+  },
+  "homepage": "https://github.com/omobosteven/sos_starwars#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.0"
+  }
+}
