@@ -3,6 +3,7 @@ module.exports = {
 
     "rules": {
         "no-console": 0,
+        "indent": ["error", 4],
         "no-param-reassign": [2, {"props": false}],
         "prefer-destructuring": 0,
         "arrow-body-style": 0,
@@ -13,5 +14,4 @@ module.exports = {
         "node": true,
         "mocha": true
         },
-
 };
