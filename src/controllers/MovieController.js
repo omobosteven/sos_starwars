@@ -3,6 +3,7 @@ import Util from '../utilities/Utils';
 
 const util = new Util();
 
+
 class MovieController {
     static async getAllMovies(req, res) {
         try {
@@ -10,7 +11,7 @@ class MovieController {
             util.setSuccess(200, 'Movies retrieved', allMovies);
             return util.send(res);
         } catch (error) {
-            util.setError(500, error.message);
+            util.setError(error.status, error.message);
             return util.send(res);
         }
     }
