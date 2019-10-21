@@ -1,6 +1,6 @@
 import axios from 'axios';
 import db from '../db/models';
-import ServerError from '../utilities/ServerError';
+import CustomError from '../utilities/CustomError';
 
 const { Comment } = db;
 
@@ -16,9 +16,11 @@ class MovieService {
                     title: movie.title,
                     release_date: movie.release_date,
                     opening_crawl: movie.opening_crawl,
-                    comment_counts: await Comment.count({ where: { episode_id: movie.episode_id } })
+                    comment_counts: await Comment.count(
+                        { where: { movie_title: movie.title.toLowerCase() } }
+                    )
                         .then((count) => count)
-                        .catch(() => { throw new ServerError(); })
+                        .catch(() => { throw new CustomError(500, 'Internal Server Error'); })
                 };
 
                 return movies;
@@ -33,7 +35,7 @@ class MovieService {
                 return data;
             });
         } catch (error) {
-            throw new ServerError();
+            throw new CustomError(500, 'Internal Server Error');
         }
     }
 }
