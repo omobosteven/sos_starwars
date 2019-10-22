@@ -5,7 +5,11 @@ const { Comment } = db;
 
 
 class CommentService {
-    static async createComment(req, title, commentData) {
+    static async createComment(req) {
+        const { comment } = req.body;
+        const { title } = req.params;
+        const { publicIpAddress } = req;
+
         try {
             const movies = req.movies;
 
@@ -17,7 +21,6 @@ class CommentService {
                 throw new CustomError(404, 'movie was not found');
             }
 
-            const { publicIpAddress, comment } = commentData;
             const newComment = {
                 movie_title: movie.title.toLowerCase(),
                 public_ip: publicIpAddress,
