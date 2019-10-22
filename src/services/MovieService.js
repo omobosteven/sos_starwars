@@ -1,4 +1,3 @@
-import axios from 'axios';
 import db from '../db/models';
 import CustomError from '../utilities/CustomError';
 
@@ -6,10 +5,9 @@ const { Comment } = db;
 
 
 class MovieService {
-    static async getAllMovies() {
+    static async getAllMovies(req) {
         try {
-            const response = await axios.get('https://swapi.co/api/films');
-            const allMovies = response.data.results;
+            const allMovies = req.movies;
 
             const transformedMovies = allMovies.map(async (movie) => {
                 const movies = {

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import db from '../db/models';
 import CustomError from '../utilities/CustomError';
 
@@ -6,12 +5,11 @@ const { Comment } = db;
 
 
 class CommentService {
-    static async createComment(title, commentData) {
+    static async createComment(req, title, commentData) {
         try {
-            const movies = await axios.get('https://swapi.co/api/films');
-            const { results } = movies.data;
+            const movies = req.movies;
 
-            const movie = results.find((data) => {
+            const movie = movies.find((data) => {
                 return data.title.toLowerCase() === title.replace(/_|-/g, ' ').toLowerCase();
             });
 
@@ -33,8 +31,18 @@ class CommentService {
         }
     }
 
-    static async getComments(title) {
+    static async getComments(req, title) {
         try {
+            const movies = req.movies;
+
+            const movie = movies.find((data) => {
+                return data.title.toLowerCase() === title.replace(/_|-/g, ' ').toLowerCase();
+            });
+
+            if (!movie) {
+                throw new CustomError(404, 'movie was not found');
+            }
+
             const comments = await Comment.findAll({
                 where: { movie_title: title.replace(/_|-/g, ' ').toLowerCase() },
                 order: [['created_at', 'DESC']]

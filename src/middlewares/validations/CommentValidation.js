@@ -1,6 +1,6 @@
-import Util from '../../utilities/Utils';
+import ResponseUtil from '../../utilities/ResponseUtils';
 
-const util = new Util();
+const util = new ResponseUtil();
 
 class CommentValidator {
     static validateComment(req, res, next) {

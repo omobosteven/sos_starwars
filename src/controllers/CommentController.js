@@ -1,8 +1,8 @@
 import publicIp from 'public-ip';
 import CommentService from '../services/CommentService';
-import Util from '../utilities/Utils';
+import ResponseUtil from '../utilities/ResponseUtils';
 
-const util = new Util();
+const util = new ResponseUtil();
 
 
 class CommentController {
@@ -13,7 +13,7 @@ class CommentController {
 
         try {
             const newComment = await CommentService.createComment(
-                title, { comment, publicIpAddress }
+                req, title, { comment, publicIpAddress }
             );
             util.setSuccess(201, 'Comment created', newComment);
             return util.send(res);
@@ -27,7 +27,7 @@ class CommentController {
         const { title } = req.params;
 
         try {
-            const comments = await CommentService.getComments(title);
+            const comments = await CommentService.getComments(req, title);
             util.setSuccess(200, 'Comments retrieved', comments);
             return util.send(res);
         } catch (error) {
