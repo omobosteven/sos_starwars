@@ -8,9 +8,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./dist/index.js",
-    "build": "npm run clean && babel src -d dist --ignore node_modules/",
+    "build": "npm run clean && babel src --out-dir dist --ignore node_modules/",
+    "postinstall": "npm run build",
     "start-dev": "nodemon --exec babel-node src/index.js",
     "clean": "rm -rf dist/",
+    "migrations": "node_modules/.bin/sequelize db:migrate",
+    "heroku-postbuild": "npm run migrations",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +30,8 @@
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -34,6 +39,8 @@
     "nodemon": "^1.19.4"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "@babel/runtime": "^7.6.3",
     "axios": "^0.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -43,7 +50,7 @@
     "pg-hstore": "^2.3.3",
     "public-ip": "^3.2.0",
     "redis": "^2.8.0",
-    "regenerator-runtime": "^0.13.3",
-    "sequelize": "^5.21.0"
+    "sequelize": "^5.21.0",
+    "sequelize-cli": "^5.5.1"
   }
 }
