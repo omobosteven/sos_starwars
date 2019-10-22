@@ -1,9 +1,10 @@
+import 'dotenv/config';
 import axios from 'axios';
-import redis from 'redis';
+import Redis from 'ioredis';
 import CustomError from '../utilities/CustomError';
 
 
-const client = redis.createClient(6379);
+const client = new Redis(process.env.REDIS_URL);
 
 
 const moviesRedisKey = 'movies';

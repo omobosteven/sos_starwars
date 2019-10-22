@@ -1,10 +1,16 @@
 {
+  "engines": {
+    "node": "10.x"
+  },
   "name": "sos_starwars",
   "version": "1.0.0",
   "description": "An API for listing the names of starwars movies along with their opening crawls and comment counts, adding and listing anonymous comments and getting character list.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "node ./dist/index.js",
+    "build": "npm run clean && babel src -d dist --ignore node_modules/",
+    "start-dev": "nodemon --exec babel-node src/index.js",
+    "clean": "rm -rf dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,6 +37,7 @@
     "axios": "^0.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "ioredis": "^4.14.1",
     "path": "^0.12.7",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
