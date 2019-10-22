@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import 'regenerator-runtime/runtime';
 import express from 'express';
 import router from './routes';
 
