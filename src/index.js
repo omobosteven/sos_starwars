@@ -16,3 +16,5 @@ app.get('/', (req, res) => res.status(200).send({
 app.use(router);
 
 app.listen(port, () => console.log(`listening on port ${port}!`),);
+
+export default app;
