@@ -42,6 +42,12 @@ An API for listing the names of starwars movies along with their opening crawls 
     ```
     npm run start-dev
     ```
+
+- Test application
+
+    ```
+    npm run test
+    ```
     
 ## API Endpoints
 <table>
