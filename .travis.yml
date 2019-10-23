@@ -1,9 +1,11 @@
 language: node_js
 node_js:
-  - "10"
+  - "10.16"
+
+dist: trusty
 
 services:
-  - postgres
+  - postgresql
   - redis-server
 
 env:
