@@ -13,8 +13,10 @@
     "start-dev": "nodemon --exec babel-node src/index.js",
     "clean": "rm -rf dist/",
     "migrations": "node_modules/.bin/sequelize db:migrate",
+    "undo:migrations": "node_modules/.bin/sequelize db:migrate:undo:all",
     "heroku-postbuild": "npm run migrations",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test nyc --reporter=html mocha --require @babel/register src/tests/index.test.js --exit && nyc report --timeout 5000",
+    "pretest": "cross-env NODE_ENV=test npm run undo:migrations && cross-env NODE_ENV=test npm run migrations"
   },
   "repository": {
     "type": "git",
@@ -33,18 +35,25 @@
     "@babel/plugin-transform-async-to-generator": "^7.5.0",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.4"
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "nyc": "^14.1.1"
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
     "@babel/runtime": "^7.6.3",
     "axios": "^0.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ioredis": "^4.14.1",
+    "nock": "^11.5.0",
     "path": "^0.12.7",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
