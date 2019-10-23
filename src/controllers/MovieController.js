@@ -15,6 +15,17 @@ class MovieController {
             return util.send(res);
         }
     }
+
+    static async getMovie(req, res) {
+        try {
+            const movie = await MovieService.getMovie(req);
+            util.setSuccess(200, 'Movie retrieved', movie);
+            return util.send(res);
+        } catch (error) {
+            util.setError(error.status, error.message);
+            return util.send(res);
+        }
+    }
 }
 
 export default MovieController;
