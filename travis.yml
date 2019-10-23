@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "10"
+
+services:
+  - postgres
+  - redis-server
+
+env:
+  global:
+  - NODE_ENV=test
+
+before_script:
+  - psql -c 'drop database if exists starwars_test;' -U postgres
+  - psql -c 'create database starwars_test' -U postgres
+  - npm run migrations
+
+script:
+  - npm test
