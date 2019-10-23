@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/omobosteven/sos_starwars.svg?branch=develop)](https://travis-ci.com/omobosteven/sos_starwars)
+
 ## SOS_STARWARS_MOVIES
 An API for listing the names of starwars movies along with their opening crawls and comment counts, adding and listing anonymous comments and getting character list.
 
