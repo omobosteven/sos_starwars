@@ -34,9 +34,9 @@ class HelperFunctions {
         }));
     }
 
-    static findMovie(movies, title) {
+    static findMovie(movies, slug) {
         const movie = movies.find((data) => {
-            return data.title.toLowerCase() === title.replace(/_|-/g, ' ').toLowerCase();
+            return data.title.toLowerCase() === slug.replace(/-/g, ' ').toLowerCase();
         });
 
         if (!movie) {

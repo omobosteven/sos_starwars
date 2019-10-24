@@ -6,9 +6,9 @@ const { Comment } = db;
 
 
 class CommentService {
-    static async createComment(comment, title, publicIpAddress, movies) {
+    static async createComment(comment, slug, publicIpAddress, movies) {
         try {
-            const movie = Helper.findMovie(movies, title);
+            const movie = Helper.findMovie(movies, slug);
 
             const newComment = {
                 movie_title: movie.title.toLowerCase(),
@@ -23,12 +23,13 @@ class CommentService {
         }
     }
 
-    static async getComments(movies, title) {
+    static async getComments(movies, slug) {
         try {
-            Helper.findMovie(movies, title);
+            Helper.findMovie(movies, slug);
 
             const comments = await Comment.findAll({
-                where: { movie_title: title.replace(/_|-/g, ' ').toLowerCase() },
+                where: { slug },
+                attributes: { exclude: ['id', 'slug'] },
                 order: [['created_at', 'DESC']]
             });
 

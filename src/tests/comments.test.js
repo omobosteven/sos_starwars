@@ -15,7 +15,7 @@ describe('Test API endpoint to post and get comments', () => {
 
     it('should post a comment for a movie', (done) => {
         chai.request(app)
-            .post('/api/movies/test_movie/comments')
+            .post('/api/movies/test-movie/comments')
             .set('Content-type', 'application/json')
             .send({ comment: 'interesting' })
             .end((err, res) => {
@@ -27,7 +27,7 @@ describe('Test API endpoint to post and get comments', () => {
 
     it('should return error if movie is not found', (done) => {
         chai.request(app)
-            .post('/api/movies/test_movie_so/comments')
+            .post('/api/movies/test-movie-so/comments')
             .set('Content-type', 'application/json')
             .send({ comment: 'interesting' })
             .end((err, res) => {
@@ -39,7 +39,7 @@ describe('Test API endpoint to post and get comments', () => {
 
     it('should return error if comment is empty', (done) => {
         chai.request(app)
-            .post('/api/movies/test_movie/comments')
+            .post('/api/movies/test-movie/comments')
             .set('Content-type', 'application/json')
             .send({ comment: '' })
             .end((err, res) => {
@@ -51,7 +51,7 @@ describe('Test API endpoint to post and get comments', () => {
 
     it('should return comments for a movie', (done) => {
         chai.request(app)
-            .get('/api/movies/test_movie/comments')
+            .get('/api/movies/test-movie/comments')
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body.data.length).to.equal(1);

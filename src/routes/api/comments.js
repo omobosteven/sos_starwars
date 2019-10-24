@@ -6,9 +6,9 @@ import getPublicIpAddress from '../../middlewares/getPublicIpAddress';
 
 const comments = express.Router();
 
-comments.post('/:title/comments',
+comments.post('/:slug/comments',
     getPublicIpAddress, redisCache,
     CommentValidation.validateComment, CommentController.createComment);
-comments.get('/:title/comments', redisCache, CommentController.getComments);
+comments.get('/:slug/comments', redisCache, CommentController.getComments);
 
 export default comments;

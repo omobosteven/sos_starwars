@@ -5,7 +5,7 @@ import redisCache from '../../middlewares/redisCache';
 
 const characters = express.Router();
 
-characters.get('/:title/characters',
+characters.get('/:slug/characters',
     QueryValidation.validateQuery, redisCache, CharacterController.getAllCharacters);
 
 export default characters;

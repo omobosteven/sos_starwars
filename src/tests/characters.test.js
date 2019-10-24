@@ -21,7 +21,7 @@ describe('Test API endpoint to get characters', () => {
 
     it('should get characters for a movie', (done) => {
         chai.request(app)
-            .get('/api/movies/test_movie/characters')
+            .get('/api/movies/test-movie/characters')
             .end((err, res) => {
                 console.log(res);
                 expect(res).to.have.status(200);

@@ -19,11 +19,11 @@ class MovieController {
     }
 
     static async getMovie(req, res) {
-        const { title } = req.params;
+        const { slug } = req.params;
         const movies = req.movies;
 
         try {
-            const movie = await MovieService.getMovie(title, movies);
+            const movie = await MovieService.getMovie(slug, movies);
             util.setSuccess(200, 'Movie retrieved', movie);
             return util.send(res);
         } catch (error) {

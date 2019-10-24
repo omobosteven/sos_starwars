@@ -7,12 +7,12 @@ const util = new ResponseUtil();
 class CommentController {
     static async createComment(req, res) {
         const { comment } = req.body;
-        const { title } = req.params;
+        const { slug } = req.params;
         const { publicIpAddress, movies } = req;
 
         try {
             const newComment = await CommentService.createComment(
-                comment, title, publicIpAddress, movies
+                comment, slug, publicIpAddress, movies
             );
             util.setSuccess(201, 'Comment created', newComment);
             return util.send(res);
@@ -23,11 +23,11 @@ class CommentController {
     }
 
     static async getComments(req, res) {
-        const { title } = req.params;
+        const { slug } = req.params;
         const { movies } = req;
 
         try {
-            const comments = await CommentService.getComments(movies, title);
+            const comments = await CommentService.getComments(movies, slug);
             util.setSuccess(200, 'Comments retrieved', comments);
             return util.send(res);
         } catch (error) {

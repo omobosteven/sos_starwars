@@ -5,6 +5,6 @@ import redisCache from '../../middlewares/redisCache';
 const movies = express.Router();
 
 movies.get('/', redisCache, MovieController.getAllMovies);
-movies.get('/:title', redisCache, MovieController.getMovie);
+movies.get('/:slug', redisCache, MovieController.getMovie);
 
 export default movies;
