@@ -2,50 +2,18 @@ import Helper from './helpers/HelperFunctions';
 import CustomError from '../utilities/CustomError';
 
 class CharacterService {
-    static async getAllCharacters(req) {
-        const { title } = req.params;
-        const { sort, filter } = req.query;
-
+    static async getAllCharacters(title, sort, filter, movies) {
         try {
-            const movies = req.movies;
-
-            const movie = movies.find((data) => {
-                return data.title.toLowerCase() === title.replace(/_|-/g, ' ').toLowerCase();
-            });
-
-            if (!movie) {
-                throw new CustomError(404, 'movie was not found');
-            }
+            const movie = Helper.findMovie(movies, title);
 
             let movieCharacters = await Helper.getMovieCharactersUrls(movie.characters);
 
             if (filter) {
-                const gender = filter.split(':');
-                const filterGender = gender[gender.length - 1].toLowerCase();
-
-                movieCharacters = movieCharacters.filter((data) => {
-                    return data.gender === filterGender;
-                });
+                movieCharacters = Helper.filterCharacter(filter, movieCharacters);
             }
 
             if (sort) {
-                const sortParams = sort.split(':');
-                const sortBy = sortParams[0].toLowerCase();
-                const order = sortParams[sortParams.length - 1].toLowerCase();
-
-                movieCharacters.sort((character1, character2) => {
-                    let firstCharacter = character1[sortBy];
-                    let secondCharacter = character2[sortBy];
-
-                    if (sortBy === 'height') {
-                        firstCharacter = parseInt(firstCharacter, 10);
-                        secondCharacter = parseInt(secondCharacter, 10);
-                    }
-
-                    return firstCharacter > secondCharacter ? 1 : -1;
-                });
-
-                movieCharacters = order === 'desc' ? movieCharacters.reverse() : movieCharacters;
+                movieCharacters = Helper.sortCharacter(sort, movieCharacters);
             }
 
             const characters = {

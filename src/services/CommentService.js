@@ -1,25 +1,14 @@
 import db from '../db/models';
+import Helper from './helpers/HelperFunctions';
 import CustomError from '../utilities/CustomError';
 
 const { Comment } = db;
 
 
 class CommentService {
-    static async createComment(req) {
-        const { comment } = req.body;
-        const { title } = req.params;
-        const { publicIpAddress } = req;
-
+    static async createComment(comment, title, publicIpAddress, movies) {
         try {
-            const movies = req.movies;
-
-            const movie = movies.find((data) => {
-                return data.title.toLowerCase() === title.replace(/_|-/g, ' ').toLowerCase();
-            });
-
-            if (!movie) {
-                throw new CustomError(404, 'movie was not found');
-            }
+            const movie = Helper.findMovie(movies, title);
 
             const newComment = {
                 movie_title: movie.title.toLowerCase(),
@@ -34,17 +23,9 @@ class CommentService {
         }
     }
 
-    static async getComments(req, title) {
+    static async getComments(movies, title) {
         try {
-            const movies = req.movies;
-
-            const movie = movies.find((data) => {
-                return data.title.toLowerCase() === title.replace(/_|-/g, ' ').toLowerCase();
-            });
-
-            if (!movie) {
-                throw new CustomError(404, 'movie was not found');
-            }
+            Helper.findMovie(movies, title);
 
             const comments = await Comment.findAll({
                 where: { movie_title: title.replace(/_|-/g, ' ').toLowerCase() },
