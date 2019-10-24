@@ -6,8 +6,14 @@ const util = new ResponseUtil();
 
 class CommentController {
     static async createComment(req, res) {
+        const { comment } = req.body;
+        const { title } = req.params;
+        const { publicIpAddress, movies } = req;
+
         try {
-            const newComment = await CommentService.createComment(req);
+            const newComment = await CommentService.createComment(
+                comment, title, publicIpAddress, movies
+            );
             util.setSuccess(201, 'Comment created', newComment);
             return util.send(res);
         } catch (error) {
@@ -18,9 +24,10 @@ class CommentController {
 
     static async getComments(req, res) {
         const { title } = req.params;
+        const { movies } = req;
 
         try {
-            const comments = await CommentService.getComments(req, title);
+            const comments = await CommentService.getComments(movies, title);
             util.setSuccess(200, 'Comments retrieved', comments);
             return util.send(res);
         } catch (error) {

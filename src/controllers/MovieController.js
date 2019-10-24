@@ -6,8 +6,10 @@ const util = new ResponseUtil();
 
 class MovieController {
     static async getAllMovies(req, res) {
+        const movies = req.movies;
+
         try {
-            const allMovies = await MovieService.getAllMovies(req);
+            const allMovies = await MovieService.getAllMovies(movies);
             util.setSuccess(200, 'Movies retrieved', allMovies);
             return util.send(res);
         } catch (error) {
@@ -17,8 +19,11 @@ class MovieController {
     }
 
     static async getMovie(req, res) {
+        const { title } = req.params;
+        const movies = req.movies;
+
         try {
-            const movie = await MovieService.getMovie(req);
+            const movie = await MovieService.getMovie(title, movies);
             util.setSuccess(200, 'Movie retrieved', movie);
             return util.send(res);
         } catch (error) {
