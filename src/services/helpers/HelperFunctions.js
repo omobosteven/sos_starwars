@@ -56,7 +56,10 @@ class HelperFunctions {
         const decPart = parseFloat(`0.${(heightInFeet + '').split('.')[1]}`);
         const inches = (decPart * 12).toFixed(2);
 
-        const totalHeight = `${feet}ft and ${inches} inches`;
+        const totalHeight = {
+            cm: `${height}cm`,
+            feet: `${feet}ft and ${inches} inches`
+        };
 
         return totalHeight;
     }
