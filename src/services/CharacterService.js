@@ -2,9 +2,9 @@ import Helper from './helpers/HelperFunctions';
 import CustomError from '../utilities/CustomError';
 
 class CharacterService {
-    static async getAllCharacters(title, sort, filter, movies) {
+    static async getAllCharacters(slug, sort, filter, movies) {
         try {
-            const movie = Helper.findMovie(movies, title);
+            const movie = Helper.findMovie(movies, slug);
 
             let movieCharacters = await Helper.getMovieCharactersUrls(movie.characters);
 

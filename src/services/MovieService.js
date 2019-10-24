@@ -19,9 +19,9 @@ class MovieService {
         }
     }
 
-    static async getMovie(title, movies) {
+    static async getMovie(slug, movies) {
         try {
-            const movie = Helper.findMovie(movies, title);
+            const movie = Helper.findMovie(movies, slug);
 
             const movieData = Helper.getMovieData(movie, Comment);
 
