@@ -23,9 +23,8 @@ describe('Test API endpoint to get characters', () => {
         chai.request(app)
             .get('/api/movies/test-movie/characters')
             .end((err, res) => {
-                console.log(res);
                 expect(res).to.have.status(200);
-                expect(res.body.data.total_characters).to.equal(1);
+                expect(res.body.data.metadata.total_characters).to.equal(1);
                 done();
             });
     });

@@ -16,9 +16,14 @@ class CharacterService {
                 movieCharacters = Helper.sortCharacter(sort, movieCharacters);
             }
 
+            const totalHeight = Helper.calculateHeight(movieCharacters);
+
             const characters = {
-                total_heights: Helper.calculateHeight(movieCharacters),
-                total_characters: movieCharacters.length,
+                metadata: {
+                    total_heights_in_cm: totalHeight.cm,
+                    total_heights_in_feet: totalHeight.feet,
+                    total_characters: movieCharacters.length,
+                },
                 characters: movieCharacters
             };
 
