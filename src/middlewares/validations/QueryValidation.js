@@ -1,19 +1,18 @@
 class QueryValidation {
     static validateQuery(req, res, next) {
-        const { sort, filter } = req.query;
+        const { sort, order } = req.query;
 
-        const sortParams = ['name', 'name:desc', 'name:asc',
-            'gender', 'gender:desc', 'gender:asc',
-            'height', 'height:desc', 'height:asc'];
+        const sortParams = ['name', 'gender', 'height'];
+        const orderParams = ['asc', 'desc'];
 
-        const filterParams = ['male', 'gender:male', 'gender:female', 'female'];
+
+        if (!(order && orderParams.includes(order.toLowerCase()))) {
+            req.query.order = 'asc';
+        }
 
         if (!(sort && sortParams.includes(sort.toLowerCase()))) {
             req.query.sort = null;
-        }
-
-        if (!(filter && filterParams.includes(filter.toLowerCase()))) {
-            req.query.filter = null;
+            req.query.order = null;
         }
 
         return next();

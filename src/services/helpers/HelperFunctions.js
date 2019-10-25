@@ -65,11 +65,9 @@ class HelperFunctions {
     }
 
     static sortCharacter(sort, characters) {
-        const sortParams = sort.split(':');
-        const sortBy = sortParams[0].toLowerCase();
-        const order = sortParams[sortParams.length - 1].toLowerCase();
+        const sortBy = sort.toLowerCase();
 
-        characters.sort((character1, character2) => {
+        return characters.sort((character1, character2) => {
             let firstCharacter = character1[sortBy];
             let secondCharacter = character2[sortBy];
 
@@ -80,16 +78,17 @@ class HelperFunctions {
 
             return firstCharacter > secondCharacter ? 1 : -1;
         });
-
-        return order === 'desc' ? characters.reverse() : characters;
     }
 
-    static filterCharacter(filter, characters) {
-        const gender = filter.split(':');
-        const filterGender = gender[gender.length - 1].toLowerCase();
+    static orderCharacter(order, characters) {
+        const orderBy = order.toLowerCase();
 
+        return orderBy === 'desc' ? characters.reverse() : characters;
+    }
+
+    static filterCharacter(gender, characters) {
         const movieCharacters = characters.filter((data) => {
-            return data.gender === filterGender;
+            return data.gender === gender;
         });
 
         return movieCharacters;

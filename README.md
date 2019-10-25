@@ -61,29 +61,34 @@ An API for listing the names of starwars movies along with their opening crawls 
       <td>/api/movies</td>
       <td>Get all movies sorted by released data</td>
   </tr>
+    <tr>
+      <td>GET</td>
+      <td>/api/movies/{movie-title-slug}</td>
+      <td>Get a movies</td>
+  </tr>
   <tr>
     <td>POST</td>
-    <td>/api/movies/{movie-title}/comments</td>
+    <td>/api/movies/{movie-title-slug}/comments</td>
     <td>Post a comment for a movie</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/api/movies/{movie-title}/comments</td>
+    <td>/api/movies/{movie-title-slug}/comments</td>
     <td>Get all comments for a movie</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/api/movies/{movie-title}/characters</td>
+    <td>/api/movies/{movie-title-slug}/characters</td>
     <td>Get all characters in a movie</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/api/movies/{movie-title}/characters?sort={name, gender:desc, height:asc}</td>
+    <td>/api/movies/{movie-title-slug}/characters?sort={name, gender, height}&order={asc, desc}</td>
     <td>Get all characters in a movie sorted by one of name, gender or height in ascending or descending order</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/api/movies/{movie-title}/characters?filter={gender:{male, female}}</td>
+    <td>/api/movies/{movie-title}/characters?gender={male, female, ...}</td>
     <td>Get all characters in a movie filterd by gender</td>
   </tr>
 </table>
@@ -119,7 +124,7 @@ Example response body:
 ```
 
 ### Comments
-`POST /api/{movie-title}/comments`
+`POST /api/movies/{movie-title-slug}/comments`
 
 NB: movie title should be separted with underscore
 
@@ -147,7 +152,7 @@ Example response body:
 }
 ```
 
-`GET /api/{movie-title}/comments`
+`GET /api/movies/{movie-title-slug}/comments`
 
 Example response body:
 
@@ -173,7 +178,7 @@ Example response body:
 ```
 
 ### Characters
-`GET /api/{movie-title}/characters`
+`GET /api/movies/{movie-title-slug}/characters?sort=&order=&gender=`
 
 Example response body:
 ```source-json
@@ -218,8 +223,6 @@ Example response body:
 ```
 
 NB: endpoint can be sorted by one of name, gender or height in ascending or decending order and can also be filtered by gender
-
-/api/{movie-title}/characters?sort=(example: name, name:asc, name:desc)&filter=(gender:male, gender:female)
 
 ## Built with
 - Javascript
