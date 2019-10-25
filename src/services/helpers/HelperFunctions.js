@@ -1,4 +1,5 @@
 import axios from 'axios';
+import slugify from 'slugify';
 import CustomError from '../../utilities/CustomError';
 
 class HelperFunctions {
@@ -14,6 +15,7 @@ class HelperFunctions {
     static async getMovieData(movie, Comment) {
         const movieData = {
             title: movie.title,
+            slug: HelperFunctions.slugifyTitle(movie.title),
             release_date: movie.release_date,
             opening_crawl: movie.opening_crawl,
             comment_counts: await Comment.count(
@@ -92,6 +94,13 @@ class HelperFunctions {
         });
 
         return movieCharacters;
+    }
+
+    static slugifyTitle(title) {
+        return slugify(title, {
+            replacement: '-',
+            lower: true
+        });
     }
 }
 

@@ -35,7 +35,8 @@ class CommentService {
 
             return comments;
         } catch (error) {
-            throw new CustomError(500, 'Internal Server Error');
+            const status = error.status ? error.status : 500;
+            throw new CustomError(status, status === 404 ? error.message : 'Internal Server Error');
         }
     }
 }
