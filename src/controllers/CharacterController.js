@@ -7,12 +7,12 @@ const util = new ResponseUtil();
 class CharacterController {
     static async getAllCharacters(req, res) {
         const { slug } = req.params;
-        const { sort, filter } = req.query;
+        const { sort, order, gender } = req.query;
         const movies = req.movies;
 
         try {
             const allCharacters = await CharacterService.getAllCharacters(
-                slug, sort, filter, movies
+                slug, sort, order, gender, movies
             );
             util.setSuccess(200, 'Characters retrieved', allCharacters);
             return util.send(res);

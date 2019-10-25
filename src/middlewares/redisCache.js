@@ -6,7 +6,7 @@ import CustomError from '../utilities/CustomError';
 const client = new Redis(process.env.REDIS_URL);
 
 
-const moviesRedisKey = 'movies';
+const moviesRedisKey = (process.env.NODE_ENV === 'test' ? 'test' : 'movies');
 
 
 const redisCache = (req, res, next) => {

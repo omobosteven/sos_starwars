@@ -27,7 +27,7 @@ describe('Test API endpoint to post and get comments', () => {
 
     it('should return error if movie is not found', (done) => {
         chai.request(app)
-            .post('/api/movies/test-movie-so/comments')
+            .post('/api/movies/test-movie-sr/comments')
             .set('Content-type', 'application/json')
             .send({ comment: 'interesting' })
             .end((err, res) => {
