@@ -15,6 +15,13 @@ app.get('/', (req, res) => res.status(200).send({
 
 app.use(router);
 
+app.use((req, res) => {
+    return res.status(404).send({
+        status: 'error',
+        message: `Route ${req.method} ${req.url} not found.`
+    });
+});
+
 app.listen(port, () => console.log(`listening on port ${port}!`),);
 
 export default app;
